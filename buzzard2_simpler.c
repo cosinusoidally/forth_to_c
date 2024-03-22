@@ -128,8 +128,8 @@ r(word_addr)
             // strcmp(str_mem, &str_mem[0]) == 0 because a string is equal to
             // itself and we exit the loop, now entry_addr is 1 and we can
             // use that to check if we found the word or not.
-            while (strcmp(str_mem, &str_mem[m[entry_addr + 1]])) {
-                entry_addr = m[entry_addr];
+            while (strcmp(str_mem, &str_mem[ri32(mr+(4*(entry_addr + 1)))])) {
+                entry_addr = ri32(mr + (4*entry_addr));
             }
 
             // if entry_addr != 1 then the word the user entered exists, so
