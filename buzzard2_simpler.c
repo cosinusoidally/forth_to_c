@@ -33,6 +33,7 @@ int  m,
      program_counter;
 // int     stack[500];
 int     *stack;
+int     stackr;
 int     stack_ptr = 0;
      // strings start at index 64 since first 64 bytes are used to read user
      // input
@@ -221,7 +222,8 @@ int main()
     m = calloc(1, 20000);
     // m[0] = 32 so that the first dictionary append is at index 32
     wi32(m, 32);
-    stack = calloc(1, 500);
+    stackr = calloc(1, 500);
+    stack = stackr;
     // : (codeword 3) 0, 1 and 2 are internal words with no names
     // 0: pushint
     // 1: compile
