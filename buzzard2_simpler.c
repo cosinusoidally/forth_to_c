@@ -151,14 +151,14 @@ r(word_addr)
             wi32(m + (4*1), ri32(m + (4*1))- 1);
             break;
         case CW__PICK: // _pick
-            top_of_stack = stack[stack_ptr - top_of_stack];
+            top_of_stack = ri32(stackr + (4*(stack_ptr - top_of_stack)));
             break;
         case CW_COMPILE: // compile code
             // a pointer to the next word is appended to the dictionary
             append_to_dict(next_word);
             break;
         case CW_MUL: // *
-            top_of_stack = top_of_stack * stack[stack_ptr];
+            top_of_stack = top_of_stack * ri32(stackr + (4*stack_ptr));
             stack_ptr = stack_ptr - 1;
             break;
         case CW_STORE: // !
