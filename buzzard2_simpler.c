@@ -101,11 +101,7 @@ r(word_addr)
     int read_count, val, entry_addr, entry_data_addr;
     int next_word = word_addr + 1;
     int codeword = ri32(m + (4 * word_addr));
-    if(0) {
-    } else if(0) {
-    } else {
-    switch (codeword) {
-        case CW__READ: /* _read */
+    if(codeword == CW__READ) {  /* _read */
             /* first 64 bytes of str_mem are used to read user input, if
              * word is larger than that it will overwrite word names
              */
@@ -168,8 +164,17 @@ r(word_addr)
                 val = atoi(str_mem);
                 append_to_dict(val);
             }
-
-            break;
+    } else if(0) {
+    } else if(0) {
+    } else if(0) {
+    } else if(0) {
+    } else if(0) {
+    } else if(0) {
+    } else if(0) {
+    } else if(0) {
+    } else if(0) {
+    } else {
+    switch (codeword) {
         case CW_EXIT: /* exit */
             /*
              * leave the current function: pop the return stack into the
