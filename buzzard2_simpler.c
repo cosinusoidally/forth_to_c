@@ -16,22 +16,24 @@
 #define CW_KEY      14
 #define CW__PICK    15
 
-// if we encounter a 2 and we call r with it, it will lookup the codeword
-// stored at m[2] which is 0, which means pushint
+/*
+ if we encounter a 2 and we call r with it, it will lookup the codeword
+ stored at m[2] which is 0, which means pushint
+*/
 #define ADDR_OF_PUSHINT 2
 
-// char str_mem[5000];
 int str_mem;
 
-// m[0] = 32 so that the first dictionary append is at index 32
-// int  m[20000] = { 32 },
+/*
+ m[0] = 32 so that the first dictionary append is at index 32
+ int  m[20000] = { 32 },
+*/
 int  m,
      // when defining the first word (CW_DEFINE), address of prev word will be
      // 1 which is used to know if we are at the first (last) dictionary
      // definition when doing lookup on _read
      last_dict_entry = 1,
      program_counter;
-// int     stack[500];
 int     stack;
 int     stack_ptr = 0;
      // strings start at index 64 since first 64 bytes are used to read user
