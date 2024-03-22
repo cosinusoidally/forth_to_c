@@ -164,18 +164,7 @@ r(word_addr)
                 val = atoi(str_mem);
                 append_to_dict(val);
             }
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else {
-    switch (codeword) {
-        case CW_EXIT: /* exit */
+    } else if(codeword == CW_EXIT) {  /* exit */
             /*
              * leave the current function: pop the return stack into the
              * program counter
@@ -183,30 +172,29 @@ r(word_addr)
 
             program_counter = ri32(m + 4*(ri32(m + (4*1))));
             wi32(m + (4*1), ri32(m + (4*1))- 1);
-            break;
-        case CW__PICK: /* _pick */
+    } else if(codeword == CW__PICK) {  /* _pick */
             top_of_stack = ri32(stack + (4*(stack_ptr - top_of_stack)));
-            break;
-        case CW_COMPILE: /* compile code */
+    } else if(codeword == CW_COMPILE) {  /* compile code */
             /* a pointer to the next word is appended to the dictionary */
             append_to_dict(next_word);
-            break;
-        case CW_MUL: /* * */
+    } else if(codeword == CW_MUL) {  /* * */
             top_of_stack = top_of_stack * ri32(stack + (4*stack_ptr));
             stack_ptr = stack_ptr - 1;
-            break;
-        case CW_STORE: /* ! */
+    } else if(codeword == CW_STORE) {  /* ! */
             wi32(m + (4*top_of_stack), ri32(stack+(4*stack_ptr)));
             stack_ptr = stack_ptr - 1;
             top_of_stack = ri32(stack+(4*stack_ptr));
             stack_ptr = stack_ptr - 1;
-            break;
-        case CW_PUSHINT: /* pushint */
+    } else if(codeword == CW_PUSHINT) {  /* pushint */
             stack_ptr = stack_ptr + 1;
             wi32(stack+(4*stack_ptr), top_of_stack);
             top_of_stack = ri32(m +(4*program_counter));
             program_counter = program_counter + 1;
-            break;
+    } else if(0) {
+    } else if(0) {
+    } else if(0) {
+    } else {
+    switch (codeword) {
         case CW_SUB: /* - */
             top_of_stack = ri32(stack+ (4*stack_ptr)) - top_of_stack;
             stack_ptr = stack_ptr - 1;
