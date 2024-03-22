@@ -140,23 +140,29 @@ r(word_addr)
                 entry_addr = ri32(m + (4*entry_addr));
             }
 
-            // if entry_addr != 1 then the word the user entered exists, so
-            // we run it
+            /*
+             * if entry_addr != 1 then the word the user entered exists, so
+             * we run it
+             */
+
             if (entry_addr != 1) {
                 // we calculate the address of the data for the entry
                 entry_data_addr = entry_addr + 2;
                 // and run it
                 r(entry_data_addr);
             } else {
-                // if we didn't find the entry we assume it's a number we
-                // append the addr of pushint instruction and then the number
+                /*
+                 * if we didn't find the entry we assume it's a number we
+                 * append the addr of pushint instruction and then the number
+                 */
+
                 append_to_dict(ADDR_OF_PUSHINT);
                 val = atoi(str_mem);
                 append_to_dict(val);
             }
 
             break;
-        case CW_EXIT: // exit
+        case CW_EXIT: /* exit */
             // leave the current function: pop the return stack into the
             // program counter
             program_counter = ri32(m + 4*(ri32(m + (4*1))));
