@@ -1,3 +1,8 @@
+/*
+ * based on buzzard2/buzzard.c and adapted by Liam Wilson
+ */
+
+
 #define CW_PUSHINT  0
 #define CW_COMPILE  1
 #define CW_RUN      2
