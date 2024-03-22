@@ -81,7 +81,8 @@ ri32(o) {
 }
 
 append_to_dict(val) {
-    int addr = ri32(m);
+    int addr;
+    addr = ri32(m);
     wi32(m + (4*addr), val);
     wi32(m, ri32(m) + 1);
 }
