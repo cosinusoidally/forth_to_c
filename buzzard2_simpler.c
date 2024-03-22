@@ -151,7 +151,8 @@ r(word_addr)
         case CW_EXIT: // exit
             // leave the current function: pop the return stack into the
             // program counter
-            program_counter = m[m[1]];
+//            program_counter = m[m[1]];
+            program_counter = ri32(mr + 4*(ri32(mr + (4*1))));
             m[1] -= 1;
             break;
         case CW__PICK: // _pick
