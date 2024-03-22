@@ -187,8 +187,10 @@ r(word_addr)
             break;
         case CW_RUN: // run code
             // push program counter into return stack
-            m[1] += 1;
-            m[m[1]] = program_counter;
+//            m[1] += 1;
+            wi32(mr + (4*1), ri32(mr + (4*1)) + 1);
+//            m[m[1]] = program_counter;
+            wi32(mr+(4*(ri32(mr+ (4*1)))), program_counter);
             // jump to the address of the next word
             program_counter = next_word;
             break;
@@ -196,11 +198,13 @@ r(word_addr)
             top_of_stack = 0 > top_of_stack;
             break;
         case CW_IMMED: // immediate
-            m[0] -= 2;
+//            m[0] -= 2;
+            wi32(mr, ri32(mr) - 2);
             append_to_dict(CW_RUN);
             break;
         case CW_FETCH: // @
-            top_of_stack = m[top_of_stack];
+//            top_of_stack = m[top_of_stack];
+            top_of_stack = ri32(mr+(4*top_of_stack));
             break;
         case CW_DIV: // /
             top_of_stack = stack[stack_ptr] / top_of_stack;
@@ -227,8 +231,8 @@ int main()
     int i, tmp1, word_to_execute;
 
     str_mem = calloc(1, 5000);
-    m = calloc(1, 20000);
-    mr = m;
+    mr = calloc(1, 20000);
+    m = mr;
     // m[0] = 32 so that the first dictionary append is at index 32
     wi32(mr, 32);
     stack = calloc(1, 500);
