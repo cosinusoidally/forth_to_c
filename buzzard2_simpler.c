@@ -32,7 +32,7 @@ int  m,
      last_dict_entry = 1,
      program_counter;
 // int     stack[500];
-int     stackr;
+int     stack;
 int     stack_ptr = 0;
      // strings start at index 64 since first 64 bytes are used to read user
      // input
@@ -150,30 +150,30 @@ r(word_addr)
             wi32(m + (4*1), ri32(m + (4*1))- 1);
             break;
         case CW__PICK: // _pick
-            top_of_stack = ri32(stackr + (4*(stack_ptr - top_of_stack)));
+            top_of_stack = ri32(stack + (4*(stack_ptr - top_of_stack)));
             break;
         case CW_COMPILE: // compile code
             // a pointer to the next word is appended to the dictionary
             append_to_dict(next_word);
             break;
         case CW_MUL: // *
-            top_of_stack = top_of_stack * ri32(stackr + (4*stack_ptr));
+            top_of_stack = top_of_stack * ri32(stack + (4*stack_ptr));
             stack_ptr = stack_ptr - 1;
             break;
         case CW_STORE: // !
-            wi32(m + (4*top_of_stack), ri32(stackr+(4*stack_ptr)));
+            wi32(m + (4*top_of_stack), ri32(stack+(4*stack_ptr)));
             stack_ptr = stack_ptr - 1;
-            top_of_stack = ri32(stackr+(4*stack_ptr));
+            top_of_stack = ri32(stack+(4*stack_ptr));
             stack_ptr = stack_ptr - 1;
             break;
         case CW_PUSHINT: // pushint
             stack_ptr = stack_ptr + 1;
-            wi32(stackr+(4*stack_ptr), top_of_stack);
+            wi32(stack+(4*stack_ptr), top_of_stack);
             top_of_stack = ri32(m +(4*program_counter));
             program_counter = program_counter + 1;
             break;
         case CW_SUB: // -
-            top_of_stack = ri32(stackr+ (4*stack_ptr)) - top_of_stack;
+            top_of_stack = ri32(stack+ (4*stack_ptr)) - top_of_stack;
             stack_ptr = stack_ptr - 1;
             break;
         case CW_RUN: // run code
@@ -194,7 +194,7 @@ r(word_addr)
             top_of_stack = ri32(m+(4*top_of_stack));
             break;
         case CW_DIV: // /
-            top_of_stack = ri32(stackr +(4*stack_ptr)) / top_of_stack;
+            top_of_stack = ri32(stack +(4*stack_ptr)) / top_of_stack;
             stack_ptr = stack_ptr - 1;
             break;
         case CW_DEFINE: // :
@@ -203,12 +203,12 @@ r(word_addr)
             break;
         case CW_ECHO: // echo
             putchar(top_of_stack);
-            top_of_stack = ri32(stackr+(4*stack_ptr));
+            top_of_stack = ri32(stack+(4*stack_ptr));
             stack_ptr = stack_ptr - 1;
             break;
         case CW_KEY: // key
             stack_ptr = stack_ptr + 1;
-            wi32(stackr +(4*stack_ptr), top_of_stack);
+            wi32(stack +(4*stack_ptr), top_of_stack);
             top_of_stack = getchar();
     }
 }
@@ -221,7 +221,7 @@ int main()
     m = calloc(1, 20000);
     // m[0] = 32 so that the first dictionary append is at index 32
     wi32(m, 32);
-    stackr = calloc(1, 500);
+    stack = calloc(1, 500);
     // : (codeword 3) 0, 1 and 2 are internal words with no names
     // 0: pushint
     // 1: compile
