@@ -195,7 +195,7 @@ r(word_addr)
             break;
         case CW_DIV: // /
             top_of_stack = stack[stack_ptr] / top_of_stack;
-            stack_ptr -= 1;
+            stack_ptr = stack_ptr - 1;
             break;
         case CW_DEFINE: // :
             def_word(CW_COMPILE);
@@ -204,10 +204,10 @@ r(word_addr)
         case CW_ECHO: // echo
             putchar(top_of_stack);
             top_of_stack = stack[stack_ptr];
-            stack_ptr -= 1;
+            stack_ptr = stack_ptr - 1;
             break;
         case CW_KEY: // key
-            stack_ptr += 1;
+            stack_ptr = stack_ptr + 1;
             stack[stack_ptr] = top_of_stack;
             top_of_stack = getchar();
     }
@@ -255,7 +255,7 @@ int main()
     // they will have two instructions
     // CW_COMPILE and the builtin codeword for them, a number from 6 to 15
     // 6: @ 7: ! 8: - 9: * 10: / 11: <0 12: exit 13: echo 14: key 15: _pick
-    for (i = 6; i < 16; i += 1) {
+    for (i = 6; i < 16; i = i + 1) {
         def_word(CW_COMPILE);
         append_to_dict(i);
     }
