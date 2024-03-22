@@ -157,24 +157,24 @@ r(word_addr)
             append_to_dict(next_word);
             break;
         case CW_MUL: // *
-            top_of_stack *= stack[stack_ptr];
-            stack_ptr -= 1;
+            top_of_stack = top_of_stack * stack[stack_ptr];
+            stack_ptr = stack_ptr - 1;
             break;
         case CW_STORE: // !
             wi32(mr + (4*top_of_stack), stack[stack_ptr]);
-            stack_ptr -= 1;
+            stack_ptr = stack_ptr - 1;
             top_of_stack = stack[stack_ptr];
-            stack_ptr -= 1;
+            stack_ptr = stack_ptr - 1;
             break;
         case CW_PUSHINT: // pushint
-            stack_ptr += 1;
+            stack_ptr = stack_ptr + 1;
             stack[stack_ptr] = top_of_stack;
             top_of_stack = ri32(mr +(4*program_counter));
-            program_counter += 1;
+            program_counter = program_counter + 1;
             break;
         case CW_SUB: // -
             top_of_stack = stack[stack_ptr] - top_of_stack;
-            stack_ptr -= 1;
+            stack_ptr = stack_ptr - 1;
             break;
         case CW_RUN: // run code
             // push program counter into return stack
