@@ -226,14 +226,14 @@ r(word_addr)
     }
 }
 
-int main()
+main()
 {
     int i, tmp1, word_to_execute;
 
     /* init some globals */
-    last_dict_entry = 1,
+    last_dict_entry = 1;
     stack_ptr = 0;
-    last_str_entry = 64,
+    last_str_entry = 64;
 
     str_mem = calloc(1, 5000);
     m = calloc(1, 20000);
