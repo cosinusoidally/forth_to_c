@@ -163,19 +163,22 @@ r(word_addr)
 
             break;
         case CW_EXIT: /* exit */
-            // leave the current function: pop the return stack into the
-            // program counter
+            /*
+             * leave the current function: pop the return stack into the
+             * program counter
+             */
+
             program_counter = ri32(m + 4*(ri32(m + (4*1))));
             wi32(m + (4*1), ri32(m + (4*1))- 1);
             break;
-        case CW__PICK: // _pick
+        case CW__PICK: /* _pick */
             top_of_stack = ri32(stack + (4*(stack_ptr - top_of_stack)));
             break;
-        case CW_COMPILE: // compile code
-            // a pointer to the next word is appended to the dictionary
+        case CW_COMPILE: /* compile code */
+            /* a pointer to the next word is appended to the dictionary */
             append_to_dict(next_word);
             break;
-        case CW_MUL: // *
+        case CW_MUL: /* * */
             top_of_stack = top_of_stack * ri32(stack + (4*stack_ptr));
             stack_ptr = stack_ptr - 1;
             break;
