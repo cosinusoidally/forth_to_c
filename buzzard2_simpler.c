@@ -208,27 +208,27 @@ r(word_addr)
         case CW_LT0: /* <0 */
             top_of_stack = 0 > top_of_stack;
             break;
-        case CW_IMMED: // immediate
+        case CW_IMMED: /* immediate */
             wi32(m, ri32(m) - 2);
             append_to_dict(CW_RUN);
             break;
-        case CW_FETCH: // @
+        case CW_FETCH: /* @ */
             top_of_stack = ri32(m+(4*top_of_stack));
             break;
-        case CW_DIV: // /
+        case CW_DIV: /* / */
             top_of_stack = ri32(stack +(4*stack_ptr)) / top_of_stack;
             stack_ptr = stack_ptr - 1;
             break;
-        case CW_DEFINE: // :
+        case CW_DEFINE: /* : */
             def_word(CW_COMPILE);
             append_to_dict(CW_RUN);
             break;
-        case CW_ECHO: // echo
+        case CW_ECHO: /* echo */
             putchar(top_of_stack);
             top_of_stack = ri32(stack+(4*stack_ptr));
             stack_ptr = stack_ptr - 1;
             break;
-        case CW_KEY: // key
+        case CW_KEY: /* key */
             stack_ptr = stack_ptr + 1;
             wi32(stack +(4*stack_ptr), top_of_stack);
             top_of_stack = getchar();
