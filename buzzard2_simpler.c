@@ -206,29 +206,23 @@ r(word_addr)
             append_to_dict(CW_RUN);
     } else if(codeword == CW_FETCH) {  /* @ */
             top_of_stack = ri32(m+(4*top_of_stack));
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else {
-    switch (codeword) {
-        case CW_DIV: /* / */
+    } else if(codeword == CW_DIV) {  /* / */
             top_of_stack = ri32(stack +(4*stack_ptr)) / top_of_stack;
             stack_ptr = stack_ptr - 1;
-            break;
-        case CW_DEFINE: /* : */
+    } else if(codeword == CW_DEFINE) {  /* : */
             def_word(CW_COMPILE);
             append_to_dict(CW_RUN);
-            break;
-        case CW_ECHO: /* echo */
+    } else if(codeword == CW_ECHO) {  /* echo */
             putchar(top_of_stack);
             top_of_stack = ri32(stack+(4*stack_ptr));
             stack_ptr = stack_ptr - 1;
-            break;
-        case CW_KEY: /* key */
+    } else if(codeword == CW_KEY) {  /* key */
             stack_ptr = stack_ptr + 1;
             wi32(stack +(4*stack_ptr), top_of_stack);
             top_of_stack = getchar();
-    }
+    } else {
+      puts("unsupported word");
+      exit(1);
     }
 }
 
