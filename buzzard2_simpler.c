@@ -193,6 +193,11 @@ r(word_addr)
     } else if(0) {
     } else if(0) {
     } else if(0) {
+    } else if(0) {
+    } else if(0) {
+    } else if(0) {
+    } else if(0) {
+    } else if(0) {
     } else {
     switch (codeword) {
         case CW_SUB: /* - */
