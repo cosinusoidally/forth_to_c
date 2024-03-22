@@ -190,37 +190,27 @@ r(word_addr)
             wi32(stack+(4*stack_ptr), top_of_stack);
             top_of_stack = ri32(m +(4*program_counter));
             program_counter = program_counter + 1;
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else if(0) {
-    } else {
-    switch (codeword) {
-        case CW_SUB: /* - */
+    } else if(codeword == CW_SUB) {  /* - */
             top_of_stack = ri32(stack+ (4*stack_ptr)) - top_of_stack;
             stack_ptr = stack_ptr - 1;
-            break;
-        case CW_RUN: /* run code */
+    } else if(codeword == CW_RUN) {  /* run code */
             /* push program counter into return stack */
             wi32(m + (4*1), ri32(m + (4*1)) + 1);
             wi32(m+(4*(ri32(m+ (4*1)))), program_counter);
             /* jump to the address of the next word */
             program_counter = next_word;
-            break;
-        case CW_LT0: /* <0 */
+    } else if(codeword == CW_LT0) {  /* <0 */
             top_of_stack = 0 > top_of_stack;
-            break;
-        case CW_IMMED: /* immediate */
+    } else if(codeword == CW_IMMED) {  /* immediate */
             wi32(m, ri32(m) - 2);
             append_to_dict(CW_RUN);
-            break;
-        case CW_FETCH: /* @ */
+    } else if(codeword == CW_FETCH) {  /* @ */
             top_of_stack = ri32(m+(4*top_of_stack));
-            break;
+    } else if(0) {
+    } else if(0) {
+    } else if(0) {
+    } else {
+    switch (codeword) {
         case CW_DIV: /* / */
             top_of_stack = ri32(stack +(4*stack_ptr)) / top_of_stack;
             stack_ptr = stack_ptr - 1;
