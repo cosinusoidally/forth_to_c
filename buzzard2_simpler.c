@@ -25,8 +25,7 @@ char *str_mem;
 
 // m[0] = 32 so that the first dictionary append is at index 32
 // int  m[20000] = { 32 },
-int  *m,
-     mr,
+int  mr,
      // when defining the first word (CW_DEFINE), address of prev word will be
      // 1 which is used to know if we are at the first (last) dictionary
      // definition when doing lookup on _read
@@ -79,7 +78,7 @@ def_word(codeword)
 {
     append_to_dict(last_dict_entry);
 //    last_dict_entry = m[0] - 1;
-    last_dict_entry = ri32(m) - 1;
+    last_dict_entry = ri32(mr) - 1;
     append_to_dict(last_str_entry);
     append_to_dict(codeword);
     scanf("%s", str_mem + last_str_entry);
@@ -232,7 +231,6 @@ int main()
 
     str_mem = calloc(1, 5000);
     mr = calloc(1, 20000);
-    m = mr;
     // m[0] = 32 so that the first dictionary append is at index 32
     wi32(mr, 32);
     stack = calloc(1, 500);
@@ -275,7 +273,7 @@ int main()
     }
 
     // top of return stack (grows upwards)
-    wi32(mr+(4*1), ri32(m));
+    wi32(mr+(4*1), ri32(mr));
     // reserve 512 ints for stack, skip stack space in dict pointer
 //    m[0] += 512;
     wi32(mr, ri32(mr)+512);
