@@ -241,54 +241,62 @@ int main()
 
     str_mem = calloc(1, 5000);
     m = calloc(1, 20000);
-    // m[0] = 32 so that the first dictionary append is at index 32
+    /* m[0] = 32 so that the first dictionary append is at index 32 */
     wi32(m, 32);
     stack = calloc(1, 500);
-    // : (codeword 3) 0, 1 and 2 are internal words with no names
-    // 0: pushint
-    // 1: compile
-    // 2: run
+    /*
+     * : (codeword 3) 0, 1 and 2 are internal words with no names
+     * 0: pushint
+     * 1: compile
+     * 2: run
+     */
     def_word(CW_DEFINE);
-    // immediate (codeword 4)
+    /* immediate (codeword 4) */
     def_word(CW_IMMED);
 
-    // define the read loop, by defining the word _read as
-    // 40: CW_COMPILE
-    // 41: CW__READ
-    // 42: CW_RUN
-    // 43: 41
-    // 44: 42
-    //
-    // from the design file: FIRST builds a very small word internally that it
-    // executes as its main loop.  This word calls _read and then calls itself.
-    // Each time it calls itself, it uses up a word on the return stack, so it
-    // will eventually trash things.
+    /*
+     * define the read loop, by defining the word _read as
+     * 40: CW_COMPILE
+     * 41: CW__READ
+     * 42: CW_RUN
+     * 43: 41
+     * 44: 42
+     *
+     * from the design file: FIRST builds a very small word internally that it
+     * executes as its main loop.  This word calls _read and then calls itself.
+     * Each time it calls itself, it uses up a word on the return stack, so it
+     * will eventually trash things.
+     */
     def_word(CW_COMPILE);
     tmp1 = ri32(m);
     append_to_dict(CW__READ);
     append_to_dict(CW_RUN);
     program_counter = ri32(m);
-    // appends 41
+    /* appends 41 */
     append_to_dict(tmp1);
-    // appends 42
+    /* appends 42 */
     append_to_dict(program_counter - 1);
 
-    // define the rest of builtin words
-    // they will have two instructions
-    // CW_COMPILE and the builtin codeword for them, a number from 6 to 15
-    // 6: @ 7: ! 8: - 9: * 10: / 11: <0 12: exit 13: echo 14: key 15: _pick
+    /*
+     * define the rest of builtin words
+     * they will have two instructions
+     * CW_COMPILE and the builtin codeword for them, a number from 6 to 15
+     * 6: @ 7: ! 8: - 9: * 10: / 11: <0 12: exit 13: echo 14: key 15: _pick
+     */
     for (i = 6; i < 16; i = i + 1) {
         def_word(CW_COMPILE);
         append_to_dict(i);
     }
 
-    // top of return stack (grows upwards)
+    /* top of return stack (grows upwards) */
     wi32(m+(4*1), ri32(m));
-    // reserve 512 ints for stack, skip stack space in dict pointer
+    /* reserve 512 ints for stack, skip stack space in dict pointer */
     wi32(m, ri32(m)+512);
 
-    // at the beginning of the loop program_counter points to 43
-    // which will call read and then call itself for the loop
+    /*
+     * at the beginning of the loop program_counter points to 43
+     * which will call read and then call itself for the loop
+     */
     while(1) {
         word_to_execute = ri32(m + (4 * program_counter));
         program_counter = program_counter + 1;
