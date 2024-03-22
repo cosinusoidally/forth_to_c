@@ -78,7 +78,8 @@ append_to_dict(val) {
 def_word(codeword)
 {
     append_to_dict(last_dict_entry);
-    last_dict_entry = m[0] - 1;
+//    last_dict_entry = m[0] - 1;
+    last_dict_entry = ri32(m) - 1;
     append_to_dict(last_str_entry);
     append_to_dict(codeword);
     scanf("%s", str_mem + last_str_entry);
@@ -89,7 +90,8 @@ r(word_addr)
 {
     int read_count, val, entry_addr, entry_data_addr;
     int next_word = word_addr + 1;
-    int codeword = m[word_addr];
+//    int codeword = m[word_addr];
+    int codeword = ri32(mr + (4 * word_addr));
     switch (codeword) {
         case CW__READ: // _read
             // first 64 bytes of str_mem are used to read user input, if
