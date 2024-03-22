@@ -153,7 +153,8 @@ r(word_addr)
             // program counter
 //            program_counter = m[m[1]];
             program_counter = ri32(mr + 4*(ri32(mr + (4*1))));
-            m[1] -= 1;
+//            m[1] -= 1;
+            wi32(mr + (4*1), ri32(mr + (4*1))- 1);
             break;
         case CW__PICK: // _pick
             top_of_stack = stack[stack_ptr - top_of_stack];
@@ -167,7 +168,8 @@ r(word_addr)
             stack_ptr -= 1;
             break;
         case CW_STORE: // !
-            m[top_of_stack] = stack[stack_ptr];
+//            m[top_of_stack] = stack[stack_ptr];
+            wi32(mr + (4*top_of_stack), stack[stack_ptr]);
             stack_ptr -= 1;
             top_of_stack = stack[stack_ptr];
             stack_ptr -= 1;
@@ -175,7 +177,8 @@ r(word_addr)
         case CW_PUSHINT: // pushint
             stack_ptr += 1;
             stack[stack_ptr] = top_of_stack;
-            top_of_stack = m[program_counter];
+//            top_of_stack = m[program_counter];
+            top_of_stack = ri32(mr +(4*program_counter));
             program_counter += 1;
             break;
         case CW_SUB: // -
