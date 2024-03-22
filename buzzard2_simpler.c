@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #define CW_PUSHINT  0
 #define CW_COMPILE  1
 #define CW_RUN      2
@@ -24,16 +20,20 @@
 // stored at m[2] which is 0, which means pushint
 #define ADDR_OF_PUSHINT 2
 
-char str_mem[5000];
+// char str_mem[5000];
+char *str_mem;
+
 // m[0] = 32 so that the first dictionary append is at index 32
-int  m[20000] = { 32 },
+// int  m[20000] = { 32 },
+int  *m,
      // when defining the first word (CW_DEFINE), address of prev word will be
      // 1 which is used to know if we are at the first (last) dictionary
      // definition when doing lookup on _read
      last_dict_entry = 1,
-     program_counter,
-     stack[500],
-     stack_ptr = 0,
+     program_counter;
+// int     stack[500];
+int     *stack;
+int     stack_ptr = 0;
      // strings start at index 64 since first 64 bytes are used to read user
      // input
      last_str_entry = 64,
@@ -192,6 +192,11 @@ void r(int word_addr)
 int main()
 {
     int i, tmp1, word_to_execute;
+
+    str_mem = calloc(1, 5000);
+    m = calloc(1, 20000);
+    m[0] = 32;
+    stack = calloc(1, 500);
     // : (codeword 3) 0, 1 and 2 are internal words with no names
     // 0: pushint
     // 1: compile
