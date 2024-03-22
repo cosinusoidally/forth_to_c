@@ -26,6 +26,7 @@ char *str_mem;
 // m[0] = 32 so that the first dictionary append is at index 32
 // int  m[20000] = { 32 },
 int  *m,
+     mr,
      // when defining the first word (CW_DEFINE), address of prev word will be
      // 1 which is used to know if we are at the first (last) dictionary
      // definition when doing lookup on _read
@@ -219,8 +220,9 @@ int main()
 
     str_mem = calloc(1, 5000);
     m = calloc(1, 20000);
+    mr = m;
     // m[0] = 32 so that the first dictionary append is at index 32
-    m[0] = 32;
+    wi32(mr, 32);
     stack = calloc(1, 500);
     // : (codeword 3) 0, 1 and 2 are internal words with no names
     // 0: pushint
@@ -242,10 +244,10 @@ int main()
     // Each time it calls itself, it uses up a word on the return stack, so it
     // will eventually trash things.
     def_word(CW_COMPILE);
-    tmp1 = m[0];
+    tmp1 = ri32(mr);
     append_to_dict(CW__READ);
     append_to_dict(CW_RUN);
-    program_counter = m[0];
+    program_counter = ri32(mr);
     // appends 41
     append_to_dict(tmp1);
     // appends 42
@@ -261,14 +263,16 @@ int main()
     }
 
     // top of return stack (grows upwards)
-    m[1] = m[0];
+    wi32(mr+(4*1), ri32(m));
     // reserve 512 ints for stack, skip stack space in dict pointer
-    m[0] += 512;
+//    m[0] += 512;
+    wi32(mr, ri32(mr)+512);
 
     // at the beginning of the loop program_counter points to 43
     // which will call read and then call itself for the loop
     while(1) {
-        word_to_execute = m[program_counter];
+//        word_to_execute = m[program_counter];
+        word_to_execute = ri32(mr + (4 * program_counter));
         program_counter = program_counter + 1;
         r(word_to_execute);
     }
