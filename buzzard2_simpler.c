@@ -101,6 +101,9 @@ r(word_addr)
     int read_count, val, entry_addr, entry_data_addr;
     int next_word = word_addr + 1;
     int codeword = ri32(m + (4 * word_addr));
+    if(0) {
+    } else if(0) {
+    } else {
     switch (codeword) {
         case CW__READ: /* _read */
             /* first 64 bytes of str_mem are used to read user input, if
@@ -237,6 +240,7 @@ r(word_addr)
             stack_ptr = stack_ptr + 1;
             wi32(stack +(4*stack_ptr), top_of_stack);
             top_of_stack = getchar();
+    }
     }
 }
 
