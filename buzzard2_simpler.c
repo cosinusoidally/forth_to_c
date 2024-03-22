@@ -68,9 +68,11 @@ ri32(o) {
 
 
 append_to_dict(val) {
-    int addr = m[0];
-    m[addr] = val;
-    m[0] += 1;
+    int addr = ri32(mr);
+//    m[addr] = val;
+    wi32(mr + (4*addr), val);
+//    m[0] += 1;
+    wi32(mr, ri32(mr) + 1);
 }
 
 def_word(codeword)

@@ -11,3 +11,5 @@ cat buzzard2/third test.fth | ./artifacts/buzzard2_tcc
 
 echo "run with gcc version:"
 cat buzzard2/third test.fth | ./artifacts/buzzard2_gcc
+
+ls -l artifacts
