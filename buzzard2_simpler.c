@@ -42,13 +42,13 @@ int     stack_ptr = 0;
 // m[0]: dictionary pointer
 // m[1]: return stack index
 
-void append_to_dict(int val) {
+append_to_dict(val) {
     int addr = m[0];
     m[addr] = val;
     m[0] += 1;
 }
 
-void def_word(int codeword)
+def_word(codeword)
 {
     append_to_dict(last_dict_entry);
     last_dict_entry = m[0] - 1;
@@ -58,7 +58,7 @@ void def_word(int codeword)
     last_str_entry += strlen(str_mem + last_str_entry) + 1;
 }
 
-void r(int word_addr)
+r(word_addr)
 {
     int read_count, val, entry_addr, entry_data_addr;
     int next_word = word_addr + 1;
@@ -195,6 +195,7 @@ int main()
 
     str_mem = calloc(1, 5000);
     m = calloc(1, 20000);
+    // m[0] = 32 so that the first dictionary append is at index 32
     m[0] = 32;
     stack = calloc(1, 500);
     // : (codeword 3) 0, 1 and 2 are internal words with no names
