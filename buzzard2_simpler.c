@@ -22,6 +22,7 @@
 
 // char str_mem[5000];
 char *str_mem;
+int str_memr;
 
 // m[0] = 32 so that the first dictionary append is at index 32
 // int  m[20000] = { 32 },
@@ -78,8 +79,8 @@ def_word(codeword)
     last_dict_entry = ri32(m) - 1;
     append_to_dict(last_str_entry);
     append_to_dict(codeword);
-    scanf("%s", str_mem + last_str_entry);
-    last_str_entry = last_str_entry + strlen(str_mem + last_str_entry) + 1;
+    scanf("%s", str_memr + last_str_entry);
+    last_str_entry = last_str_entry + strlen(str_memr + last_str_entry) + 1;
 }
 
 r(word_addr)
@@ -91,7 +92,7 @@ r(word_addr)
         case CW__READ: // _read
             // first 64 bytes of str_mem are used to read user input, if
             // word is larger than that it will overwrite word names
-            read_count = scanf("%s", str_mem);
+            read_count = scanf("%s", str_memr);
 
             if (read_count < 1) {
                 exit(0);
@@ -123,7 +124,7 @@ r(word_addr)
             // strcmp(str_mem, &str_mem[0]) == 0 because a string is equal to
             // itself and we exit the loop, now entry_addr is 1 and we can
             // use that to check if we found the word or not.
-            while (strcmp(str_mem, &str_mem[ri32(m+(4*(entry_addr + 1)))])) {
+            while (strcmp(str_memr, str_memr + ri32(m+(4*(entry_addr + 1))))) {
                 entry_addr = ri32(m + (4*entry_addr));
             }
 
@@ -217,7 +218,8 @@ int main()
 {
     int i, tmp1, word_to_execute;
 
-    str_mem = calloc(1, 5000);
+    str_memr = calloc(1, 5000);
+    str_mem = str_memr;
     m = calloc(1, 20000);
     // m[0] = 32 so that the first dictionary append is at index 32
     wi32(m, 32);
