@@ -35,7 +35,7 @@ int str_mem;
  * int  m[20000] = { 32 },
  */
 
-int  m;
+int m;
 
 /*
  *    when defining the first word (CW_DEFINE), address of prev word will be
@@ -43,14 +43,14 @@ int  m;
  *    definition when doing lookup on _read
  */
 int last_dict_entry, program_counter;
-int     stack;
-int     stack_ptr;
+int stack;
+int stack_ptr;
 
 /*
-      strings start at index 64 since first 64 bytes are used to read user
-      input
-*/
-int  last_str_entry, top_of_stack;
+ *    strings start at index 64 since first 64 bytes are used to read user
+ *    input
+ */
+int last_str_entry, top_of_stack;
 
 /*
  * m[0]: dictionary pointer
