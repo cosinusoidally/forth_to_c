@@ -1,0 +1,8 @@
+grabbed from https://github.com/marianoguerra/ricardo-forth/
+
+Note the copyright is a bit weird on this. I think it was written by Sean
+Barrett (https://github.com/nothings) for the International Obfuscated C Code
+Contest in 1992, but the files in this directory are covered by the COPYRIGHT
+file (and, unless otherwise indicated, only the files in this directory). I
+assume the modifications to buzzard.c are also partially copywritten by the
+author or ricardo forth, but I'm not sure.
