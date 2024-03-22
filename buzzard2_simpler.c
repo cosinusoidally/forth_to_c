@@ -21,7 +21,6 @@
 #define ADDR_OF_PUSHINT 2
 
 // char str_mem[5000];
-char *str_mem;
 int str_memr;
 
 // m[0] = 32 so that the first dictionary append is at index 32
@@ -139,7 +138,7 @@ r(word_addr)
                 // if we didn't find the entry we assume it's a number we
                 // append the addr of pushint instruction and then the number
                 append_to_dict(ADDR_OF_PUSHINT);
-                val = atoi(str_mem);
+                val = atoi(str_memr);
                 append_to_dict(val);
             }
 
@@ -219,7 +218,6 @@ int main()
     int i, tmp1, word_to_execute;
 
     str_memr = calloc(1, 5000);
-    str_mem = str_memr;
     m = calloc(1, 20000);
     // m[0] = 32 so that the first dictionary append is at index 32
     wi32(m, 32);
