@@ -98,9 +98,9 @@ def_word(codeword)
 
 r(word_addr)
 {
-    int read_count, val, entry_addr, entry_data_addr;
-    int next_word = word_addr + 1;
-    int codeword = ri32(m + (4 * word_addr));
+    int read_count, val, entry_addr, entry_data_addr, next_word, codeword;
+    next_word = word_addr + 1;
+    codeword = ri32(m + (4 * word_addr));
     if(codeword == CW__READ) {  /* _read */
             /* first 64 bytes of str_mem are used to read user input, if
              * word is larger than that it will overwrite word names
