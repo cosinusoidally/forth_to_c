@@ -244,7 +244,7 @@ int main()
     // which will call read and then call itself for the loop
     while(1) {
         word_to_execute = m[program_counter];
-        program_counter += 1;
+        program_counter = program_counter + 1;
         r(word_to_execute);
     }
 
