@@ -42,15 +42,15 @@ int  m,
  *    1 which is used to know if we are at the first (last) dictionary
  *    definition when doing lookup on _read
  */
-     last_dict_entry = 1,
+     last_dict_entry,
      program_counter;
 int     stack;
-int     stack_ptr = 0;
+int     stack_ptr;
 /*
       strings start at index 64 since first 64 bytes are used to read user
       input
 */
-     last_str_entry = 64,
+     last_str_entry,
      top_of_stack;
 /*
  * m[0]: dictionary pointer
@@ -243,6 +243,11 @@ r(word_addr)
 int main()
 {
     int i, tmp1, word_to_execute;
+
+    /* init some globals */
+    last_dict_entry = 1,
+    stack_ptr = 0;
+    last_str_entry = 64,
 
     str_mem = calloc(1, 5000);
     m = calloc(1, 20000);
