@@ -174,7 +174,7 @@ r(word_addr)
             program_counter = program_counter + 1;
             break;
         case CW_SUB: // -
-            top_of_stack = stack[stack_ptr] - top_of_stack;
+            top_of_stack = ri32(stackr+ (4*stack_ptr)) - top_of_stack;
             stack_ptr = stack_ptr - 1;
             break;
         case CW_RUN: // run code
@@ -195,7 +195,7 @@ r(word_addr)
             top_of_stack = ri32(m+(4*top_of_stack));
             break;
         case CW_DIV: // /
-            top_of_stack = stack[stack_ptr] / top_of_stack;
+            top_of_stack = ri32(stackr +(4*stack_ptr)) / top_of_stack;
             stack_ptr = stack_ptr - 1;
             break;
         case CW_DEFINE: // :
@@ -204,12 +204,12 @@ r(word_addr)
             break;
         case CW_ECHO: // echo
             putchar(top_of_stack);
-            top_of_stack = stack[stack_ptr];
+            top_of_stack = ri32(stackr+(4*stack_ptr));
             stack_ptr = stack_ptr - 1;
             break;
         case CW_KEY: // key
             stack_ptr = stack_ptr + 1;
-            stack[stack_ptr] = top_of_stack;
+            wi32(stackr +(4*stack_ptr), top_of_stack);
             top_of_stack = getchar();
     }
 }
