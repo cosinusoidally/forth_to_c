@@ -1,4 +1,4 @@
-: immediate _read @ ! - * / <0 exit echo key _pick
+: immediate _read @ ! - * / <0 exit echo key _pick ffi_call
 
 : debug immediate 1 5 ! exit
 

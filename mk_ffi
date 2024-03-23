@@ -10,12 +10,12 @@ echo "Build ffi with otccelf"
 chmod +x artifacts/buzzard2_otccelf
 
 echo "run with tcc version:"
-cat buzzard2/third_ffi test.fth | ./artifacts/buzzard2_tcc
+cat buzzard2/third_ffi test_ffi.fth | ./artifacts/buzzard2_tcc
 
 echo "run with gcc version:"
-cat buzzard2/third_ffi test.fth | ./artifacts/buzzard2_gcc
+cat buzzard2/third_ffi test_ffi.fth | ./artifacts/buzzard2_gcc
 
 echo "run with otccelf version:"
-cat buzzard2/third_ffi test.fth | ./artifacts/buzzard2_otccelf
+cat buzzard2/third_ffi test_ffi.fth | ./artifacts/buzzard2_otccelf
 
 ls -l artifacts
