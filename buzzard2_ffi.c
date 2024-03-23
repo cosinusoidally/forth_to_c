@@ -50,6 +50,10 @@ pop(){
    return ri32(stack+(4*(stack_ptr+1)));
 }
 
+peeks(s){
+  return ri32(stack+(4*(stack_ptr+s)));
+}
+
 r(word_addr)
 {
     int read_count, val, entry_addr, entry_data_addr, next_word, codeword;
@@ -130,12 +134,19 @@ r(word_addr)
             puts("ffi called");
             printf("tos %d\n", top_of_stack);
             fn = top_of_stack;
+            a1=peeks(0);
+            a2=peeks(-1);
+            a3=peeks(-2);
+            a4=peeks(-3);
+            a5=peeks(-4);
+            a6=peeks(-5);
+            a7=peeks(-6);
             if(fn == 1) {
-              a1=pop(); a2=pop();
+              pop(); pop();
               printf("calling calloc %d %d\n", a1, a2);
               top_of_stack = calloc(a1, a2);
             } else if(fn == 2){
-              a1=pop(); a2=pop();
+              pop(); pop();
               printf("calling wi8 %d %d\n", a1, a2);
               wi8(a1, a2);
               top_of_stack = ri32(stack+(4*stack_ptr));
