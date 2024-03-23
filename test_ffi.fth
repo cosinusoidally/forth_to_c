@@ -1,6 +1,13 @@
-: calloc 1 ;
-: wi8    2 ;
-: puts   3 ;
+: calloc_n 1 ;
+: wi8_n    2 ;
+: puts_n   3 ;
+
+var rval
+
+: calloc calloc_n ffi_call rval ! . . rval @ ;
+: wi8 wi8_n ffi_call . . ;
+: puts puts_n ffi_call . ;
+
 : prc swap wi8 ffi_call ;
 
 var b
@@ -9,8 +16,8 @@ var c
 : inc_c c @ 1 + c !  c @ ;
 
 : tcc_main
-10 9 8
-100 1 calloc ffi_call b !
+10 9 8 7
+100 1 calloc b !
 b @ c !
 c @ 72 prc
 inc_c 101 prc
@@ -18,7 +25,8 @@ inc_c 108 prc
 inc_c 108 prc
 inc_c 111 prc
 inc_c '\n' prc
-b @ puts ffi_call
+b @ puts
+b @ 1 + puts
 . . . .
 ;
 

@@ -142,17 +142,14 @@ r(word_addr)
             a6=peeks(-5);
             a7=peeks(-6);
             if(fn == 1) {
-              pop(); pop();
               printf("calling calloc %d %d\n", a1, a2);
               top_of_stack = calloc(a1, a2);
             } else if(fn == 2){
-              pop(); pop();
               printf("calling wi8 %d %d\n", a1, a2);
               wi8(a1, a2);
               top_of_stack = ri32(stack+(4*stack_ptr));
               stack_ptr = stack_ptr - 1;
             } else if(fn == 3){
-              a1=pop();
               printf("calling puts %d string: %s\n", a1, a1);
               top_of_stack = ri32(stack+(4*stack_ptr));
               stack_ptr = stack_ptr - 1;
