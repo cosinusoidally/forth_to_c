@@ -1,12 +1,14 @@
 : calloc_n 1 ;
 : wi8_n    2 ;
 : puts_n   3 ;
+: ri8_n    4 ;
 
 var rval
 
 : calloc calloc_n ffi_call rval ! drop drop rval @ ;
 : wi8 wi8_n ffi_call drop drop ;
 : puts puts_n ffi_call drop ;
+: ri8 ri8_n ffi_call rval ! drop rval @ ;
 
 : prc swap wi8 ;
 
@@ -39,21 +41,44 @@ var str_buf
 var l_offset
 var l_len
 
+var l_count
+
+var out-str
+var char
+
+: copy-str
+  str_buf @ l_offset @ + ri8 char !
+  char @ out-str @ l_offset @ + wi8
+  l_offset @ 1 + l_offset !
+  char @ 0
+  = if
+    out-str @
+    exit
+  then
+  tail copy-str
+;
+
 : loop-l"
   key dup
   '"' =
   if
    drop
+   l_len @ 1 + 1 calloc out-str !
    exit
   then
   str_buf @ l_len @ + wi8
   l_len @ 1 + l_len !
   tail loop-l" ;
 
-: l" key drop 0 l_len ! loop-l" ;
+: loop-l-wrap loop-l" ;
 
-l" This is a test
-"
+: l" key drop 0 l_len ! loop-l-wrap  0 l_offset ! copy-str ;
+
+var str1
+
+l" This is a test" str1 !
 l_len @
 . . .
 str_buf @ puts
+
+str1 @ puts

@@ -144,8 +144,10 @@ r(word_addr)
             a6=peeks(-5);
             a7=peeks(-6);
             if(fn == 1) {
-              printf("calling calloc %d %d\n", a1, a2);
-              top_of_stack = calloc(a1, a2);
+              printf("calling calloc %d %d calloced: ", a1, a2);
+              rval = calloc(a1, a2);
+              printf("%d\n",rval);
+              top_of_stack =  rval;
             } else if(fn == 2){
               /* printf("calling wi8 %d %d\n", a1, a2); */
               wi8(a1, a2);
@@ -153,8 +155,12 @@ r(word_addr)
               stack_ptr = stack_ptr - 1;
             } else if(fn == 3){
               printf("calling puts %d string: %s\n", a1, a1);
+              puts(a1);
               top_of_stack = ri32(stack+(4*stack_ptr));
               stack_ptr = stack_ptr - 1;
+            } else if(fn == 4){
+              /* printf("calling ri8 %d\n", a1); */
+              top_of_stack = ri8(a1);
             } else {
               puts("unsupported ffi function");
               exit(1);
