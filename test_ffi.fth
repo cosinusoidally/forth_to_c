@@ -31,8 +31,3 @@ b @ 1 + puts
 ;
 
 tcc_main
-
-: foo "
-Hello
-" ;
-foo .
