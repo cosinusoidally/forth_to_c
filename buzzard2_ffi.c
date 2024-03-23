@@ -118,6 +118,8 @@ r(word_addr)
             stack_ptr = stack_ptr + 1;
             wi32(stack +(4*stack_ptr), top_of_stack);
             top_of_stack = getchar();
+    } else if(codeword == 16) { /* ffi_call */
+            puts("ffi called");
     } else {
       puts("unsupported word");
       exit(1);
@@ -143,7 +145,7 @@ main()
     program_counter = ri32(m);
     append_to_dict(tmp1);
     append_to_dict(program_counter - 1);
-    for (i = 6; i < 16; i = i + 1) {
+    for (i = 6; i < 17; i = i + 1) {
         def_word(1);
         append_to_dict(i);
     }
