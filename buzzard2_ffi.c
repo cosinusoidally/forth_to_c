@@ -131,9 +131,20 @@ r(word_addr)
             printf("tos %d\n", top_of_stack);
             fn = top_of_stack;
             if(fn == 1) {
-              puts("calling calloc");
               a1=pop(); a2=pop();
               printf("calling calloc %d %d\n", a1, a2);
+              top_of_stack = calloc(a1, a2);
+            } else if(fn == 2){
+              a1=pop(); a2=pop();
+              printf("calling wi8 %d %d\n", a1, a2);
+              wi8(a1, a2);
+              top_of_stack = ri32(stack+(4*stack_ptr));
+              stack_ptr = stack_ptr - 1;
+            } else if(fn == 3){
+              a1=pop();
+              printf("calling puts %d string: %s\n", a1, a1);
+              top_of_stack = ri32(stack+(4*stack_ptr));
+              stack_ptr = stack_ptr - 1;
             } else {
               top_of_stack = 10;
               stack_ptr = stack_ptr - 1;
