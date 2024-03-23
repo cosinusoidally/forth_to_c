@@ -1,10 +1,10 @@
 ./mk_clean
 
 echo "Build ffi with tcc"
-tcc buzzard2_ffi.c -o artifacts/buzzard2_tcc
+tcc buzzard2_ffi.c -o artifacts/buzzard2_tcc -ldl
 echo ""
 echo "Build ffi with gcc"
-gcc -O0 -g buzzard2_ffi.c -o artifacts/buzzard2_gcc
+gcc -O0 -g buzzard2_ffi.c -o artifacts/buzzard2_gcc -ldl
 echo "Build ffi with otccelf"
 ../tcc_bootstrap_alt/otccelf/artifacts/otccelf_js3.exe buzzard2_ffi.c artifacts/buzzard2_otccelf
 chmod +x artifacts/buzzard2_otccelf

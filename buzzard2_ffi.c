@@ -161,6 +161,9 @@ r(word_addr)
             } else if(fn == 4){
               /* printf("calling ri8 %d\n", a1); */
               top_of_stack = ri8(a1);
+            } else if(fn == 5){
+              printf("calling dlsym %d %d\n", a1, a2);
+              top_of_stack = dlsym(a1, a2);
             } else {
               puts("unsupported ffi function");
               exit(1);
