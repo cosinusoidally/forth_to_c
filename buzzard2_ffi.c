@@ -45,9 +45,17 @@ def_word(codeword)
     last_str_entry = last_str_entry + strlen(str_mem + last_str_entry) + 1;
 }
 
+pop(){
+   stack_ptr = stack_ptr - 1;
+   return ri32(stack+(4*(stack_ptr+1)));
+}
+
 r(word_addr)
 {
     int read_count, val, entry_addr, entry_data_addr, next_word, codeword;
+    /* for the ffi */
+    int fn, a1, a2, a3, a4, a5, a6, a7, rval;
+
     next_word = word_addr + 1;
     codeword = ri32(m + (4 * word_addr));
     if(codeword == 5) {
@@ -121,8 +129,15 @@ r(word_addr)
     } else if(codeword == 16) { /* ffi_call */
             puts("ffi called");
             printf("tos %d\n", top_of_stack);
-            top_of_stack = ri32(stack+(4*stack_ptr));
-            stack_ptr = stack_ptr - 1;
+            fn = top_of_stack;
+            if(fn == 1) {
+              puts("calling calloc");
+              a1=pop(); a2=pop();
+              printf("calling calloc %d %d\n", a1, a2);
+            } else {
+              top_of_stack = 10;
+              stack_ptr = stack_ptr - 1;
+            }
     } else {
       puts("unsupported word");
       exit(1);
