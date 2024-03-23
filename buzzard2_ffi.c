@@ -147,7 +147,7 @@ r(word_addr)
               printf("calling calloc %d %d\n", a1, a2);
               top_of_stack = calloc(a1, a2);
             } else if(fn == 2){
-              printf("calling wi8 %d %d\n", a1, a2);
+              /* printf("calling wi8 %d %d\n", a1, a2); */
               wi8(a1, a2);
               top_of_stack = ri32(stack+(4*stack_ptr));
               stack_ptr = stack_ptr - 1;

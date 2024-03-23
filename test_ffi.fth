@@ -36,6 +36,9 @@ var str_buf
 
 256 1 calloc str_buf !
 
+var l_offset
+var l_len
+
 : loop-l"
   key dup
   '"' =
@@ -43,14 +46,14 @@ var str_buf
    drop
    exit
   then
-  echo
-  1 +
+  str_buf @ l_len @ + wi8
+  l_len @ 1 + l_len !
   tail loop-l" ;
 
-: l" key drop 0 loop-l" ;
+: l" key drop 0 l_len ! loop-l" ;
 
 l" This is a test
 "
-
+l_len @
 . . .
 str_buf @ puts
