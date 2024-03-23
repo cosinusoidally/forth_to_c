@@ -31,3 +31,26 @@ b @ 1 + puts
 ;
 
 tcc_main
+
+var str_buf
+
+256 1 calloc str_buf !
+
+: loop-l"
+  key dup
+  '"' =
+  if
+   drop
+   exit
+  then
+  echo
+  1 +
+  tail loop-l" ;
+
+: l" key drop 0 loop-l" ;
+
+l" This is a test
+"
+
+. . .
+str_buf @ puts
