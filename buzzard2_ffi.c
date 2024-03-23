@@ -131,8 +131,10 @@ r(word_addr)
             wi32(stack +(4*stack_ptr), top_of_stack);
             top_of_stack = getchar();
     } else if(codeword == 16) { /* ffi_call */
+/*
             puts("ffi called");
             printf("tos %d\n", top_of_stack);
+*/
             fn = top_of_stack;
             a1=peeks(0);
             a2=peeks(-1);
@@ -154,8 +156,8 @@ r(word_addr)
               top_of_stack = ri32(stack+(4*stack_ptr));
               stack_ptr = stack_ptr - 1;
             } else {
-              top_of_stack = 10;
-              stack_ptr = stack_ptr - 1;
+              puts("unsupported ffi function");
+              exit(1);
             }
     } else {
       puts("unsupported word");

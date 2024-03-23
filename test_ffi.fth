@@ -4,11 +4,11 @@
 
 var rval
 
-: calloc calloc_n ffi_call rval ! . . rval @ ;
-: wi8 wi8_n ffi_call . . ;
-: puts puts_n ffi_call . ;
+: calloc calloc_n ffi_call rval ! drop drop rval @ ;
+: wi8 wi8_n ffi_call drop drop ;
+: puts puts_n ffi_call drop ;
 
-: prc swap wi8 ffi_call ;
+: prc swap wi8 ;
 
 var b
 var c
@@ -32,6 +32,7 @@ b @ 1 + puts
 
 tcc_main
 
-: foo " Hello
+: foo "
+Hello
 " ;
 foo .
