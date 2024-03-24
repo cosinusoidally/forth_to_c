@@ -117,6 +117,16 @@ l" strcpy" 0 dlsym strcpy_sym !
   rval ! drop drop rval @
 ;
 
+var fopen_sym
+l" fopen" 0 dlsym fopen_sym !
+
+: fopen
+  " fopen called
+"
+  fopen_sym @ generic_call
+  rval ! drop drop rval @
+;
+
 var msg1
 
 ( globals for otccelf )
@@ -130,9 +140,10 @@ var prog
 var vars
 var sym_stk
 var tokens
+var file
 
 var rmode
-l"r" rmode !
+l" r" rmode !
 
 l" otccelf start" msg1 !
 
@@ -165,6 +176,8 @@ l" int if else while break return for define main " tokens !
   glo @ data !
   ALLOC_SIZE @ 1 calloc prog !
   prog @ ind !
+  ALLOC_SIZE @ 1 calloc vars !
+  rmode @ in_file @ fopen file !
 ;
 
 tcc_main
