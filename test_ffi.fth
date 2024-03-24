@@ -98,3 +98,14 @@ var puts2
 l" puts" 0 dlsym puts2 !
 
 l" another test" puts2 @ generic_call
+
+var printf_sym
+l" printf" 0 dlsym printf_sym !
+
+: printf printf_sym @ generic_call ;
+
+100 200 300 l" test printf %x %x %x
+" printf
+
+var exit_sym
+l" exit" exit_sym !
