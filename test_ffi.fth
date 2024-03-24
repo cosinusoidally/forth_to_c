@@ -127,6 +127,14 @@ l" fopen" 0 dlsym fopen_sym !
   rval ! drop drop rval @
 ;
 
+var fgetc_sym
+l" fgetc" 0 dlsym fgetc_sym !
+
+: fgetc
+  fgetc_sym @ generic_call
+  rval ! drop rval @
+;
+
 var msg1
 
 ( globals for otccelf )
@@ -141,11 +149,18 @@ var vars
 var sym_stk
 var tokens
 var file
+var ch
 
 var rmode
 l" r" rmode !
 
 l" otccelf start" msg1 !
+
+: inp
+  ( FIXME rest of impl)
+  file @ fgetc ch !
+  ch @ echo
+;
 
 : init_c
   " init_c called
@@ -178,6 +193,9 @@ l" int if else while break return for define main " tokens !
   prog @ ind !
   ALLOC_SIZE @ 1 calloc vars !
   rmode @ in_file @ fopen file !
+
+  ( missing code )
+  inp
 ;
 
 tcc_main
