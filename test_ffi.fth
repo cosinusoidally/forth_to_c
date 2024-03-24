@@ -121,6 +121,9 @@ var vars
 var sym_stk
 var tokens
 
+var rmode
+l"r" rmode !
+
 l" otccelf start" msg1 !
 
 : init_c
