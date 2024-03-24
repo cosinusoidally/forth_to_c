@@ -110,6 +110,7 @@ l" printf" 0 dlsym printf_sym !
 : strcpy
   " strcpy called
 "
+  0 ( FIXME dummy)
   rval ! drop drop rval @
 ;
 
