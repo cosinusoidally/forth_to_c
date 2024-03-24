@@ -123,12 +123,16 @@ l" otccelf start" msg1 !
 "
 ;
 
-var tcc_main_n
-var tcc_main_t
+var in_file
+var out_file
+
+l" ex1.c" in_file !
+l" artifacts/ex1.exe" out_file !
+
 : tcc_main
   msg1 @ puts
   init_c
   init_globals
 ;
 
-0 0 tcc_main
+tcc_main
