@@ -119,6 +119,7 @@ var ind
 var prog
 var vars
 var sym_stk
+var tokens
 
 l" otccelf start" msg1 !
 
@@ -138,6 +139,8 @@ var out_file
 
 l" ex1.c" in_file !
 l" artifacts/ex1.exe" out_file !
+
+l" int if else while break return for define main " tokens !
 
 : tcc_main
   msg1 @ puts
