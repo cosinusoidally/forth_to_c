@@ -167,7 +167,7 @@ r(word_addr)
             } else if(fn == 6){
               printf("calling generic_call %d %d\n", a1, a2);
               fn = a1;
-              top_of_stack = 0;
+              top_of_stack = (*(int (*)())(fn)) (a2, a3, a4, a5, a6, a7);
             } else {
               puts("unsupported ffi function");
               exit(1);
