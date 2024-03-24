@@ -3,6 +3,7 @@
 : puts_n   3 ;
 : ri8_n    4 ;
 : dlsym_n  5 ;
+: generic_call_n  6 ;
 
 var rval
 
@@ -11,6 +12,7 @@ var rval
 : puts puts_n ffi_call drop ;
 : ri8 ri8_n ffi_call rval ! drop rval @ ;
 : dlsym dlsym_n ffi_call rval ! drop drop rval @ ;
+: generic_call generic_call_n ffi_call ;
 
 : prc swap wi8 ;
 
