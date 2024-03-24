@@ -107,5 +107,18 @@ l" printf" 0 dlsym printf_sym !
 100 200 300 l" test printf %x %x %x
 " printf
 
-var exit_sym
-l" exit" exit_sym !
+var msg1
+
+l" otccelf start" msg1 !
+
+: init_c
+  " init_c called
+"
+;
+
+: tcc_main
+  msg1 @ puts
+  init_c
+;
+
+tcc_main

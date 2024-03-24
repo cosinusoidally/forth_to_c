@@ -144,7 +144,7 @@ r(word_addr)
             a6=peeks(-5);
             a7=peeks(-6);
             if(fn == 1) {
-              printf("calling calloc %d %d calloced: ", a1, a2);
+              /* printf("calling calloc %d %d calloced: ", a1, a2); */
               rval = calloc(a1, a2);
               printf("%d\n",rval);
               top_of_stack =  rval;
@@ -154,7 +154,7 @@ r(word_addr)
               top_of_stack = ri32(stack+(4*stack_ptr));
               stack_ptr = stack_ptr - 1;
             } else if(fn == 3){
-              printf("calling puts %d string: %s\n", a1, a1);
+              /* printf("calling puts %d string: %s\n", a1, a1); */
               puts(a1);
               top_of_stack = ri32(stack+(4*stack_ptr));
               stack_ptr = stack_ptr - 1;
@@ -162,10 +162,10 @@ r(word_addr)
               /* printf("calling ri8 %d\n", a1); */
               top_of_stack = ri8(a1);
             } else if(fn == 5){
-              printf("calling dlsym %d %d\n", a1, a2);
+              /* printf("calling dlsym %d %d\n", a1, a2); */
               top_of_stack = dlsym(a1, a2);
             } else if(fn == 6){
-              printf("calling generic_call %d %d\n", a1, a2);
+              /* printf("calling generic_call %d %d\n", a1, a2); */
               fn = a1;
               top_of_stack = (*(int (*)())(fn)) (a2, a3, a4, a5, a6, a7);
             } else {
