@@ -2,6 +2,7 @@
 : wi8_n    2 ;
 : puts_n   3 ;
 : ri8_n    4 ;
+: dlsym_n  5 ;
 
 var rval
 
@@ -9,6 +10,7 @@ var rval
 : wi8 wi8_n ffi_call drop drop ;
 : puts puts_n ffi_call drop ;
 : ri8 ri8_n ffi_call rval ! drop rval @ ;
+: dlsym dlsym_n ffi_call rval ! drop drop rval @ ;
 
 : prc swap wi8 ;
 
@@ -87,5 +89,10 @@ str_buf @ puts
 str1 @ puts
 str2 @ puts
 str3 @ puts
-
 str_buf @ puts
+
+var puts2
+
+l" puts" 0 dlsym puts2 !
+
+l" another test" puts2 @ generic_call

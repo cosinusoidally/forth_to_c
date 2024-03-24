@@ -164,6 +164,10 @@ r(word_addr)
             } else if(fn == 5){
               printf("calling dlsym %d %d\n", a1, a2);
               top_of_stack = dlsym(a1, a2);
+            } else if(fn == 6){
+              printf("calling generic_call %d %d\n", a1, a2);
+              fn = a1;
+              top_of_stack = 0;
             } else {
               puts("unsupported ffi function");
               exit(1);
