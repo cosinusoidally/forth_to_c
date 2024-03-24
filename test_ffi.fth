@@ -161,6 +161,10 @@ l" int if else while break return for define main " tokens !
   init_globals
   ALLOC_SIZE @ 1 calloc sym_stk !
   tokens @ sym_stk @ strcpy dstk !
+  ALLOC_SIZE @ 1 calloc glo !
+  glo @ data !
+  ALLOC_SIZE @ 1 calloc prog !
+  prog @ ind !
 ;
 
 tcc_main
