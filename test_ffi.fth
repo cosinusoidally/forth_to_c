@@ -109,6 +109,8 @@ l" printf" 0 dlsym printf_sym !
 
 var msg1
 
+( globals for otccelf )
+
 l" otccelf start" msg1 !
 
 : init_c
@@ -116,9 +118,17 @@ l" otccelf start" msg1 !
 "
 ;
 
+: init_globals
+  " init_globals called
+"
+;
+
+var tcc_main_n
+var tcc_main_t
 : tcc_main
   msg1 @ puts
   init_c
+  init_globals
 ;
 
-tcc_main
+0 0 tcc_main
