@@ -17,7 +17,7 @@ var c
 
 : inc_c c @ 1 + c !  c @ ;
 
-: tcc_main
+: test_main
 10 9 8 7
 100 1 calloc b !
 b @ c !
@@ -32,7 +32,7 @@ b @ 1 + puts
 . . . .
 ;
 
-tcc_main
+test_main
 
 var str_buf
 
