@@ -210,3 +210,27 @@ sym_stk @ puts
 dstk @ l"
 dstk 0x%x
 " printf
+
+( char codes are not defined by default)
+
+: 'a' 97 ; : 'b' 98 ;
+
+: '0' 48 ;
+
+var i
+var j
+
+: loop-test
+   10 0
+   do
+   0 i !
+   10 0
+   do
+    '0' i @ + echo
+    i @ 1 + i !
+   loop
+  '\n' echo
+  loop
+;
+
+( loop-test)
