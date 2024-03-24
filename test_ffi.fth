@@ -107,6 +107,12 @@ l" printf" 0 dlsym printf_sym !
 100 200 300 l" test printf %x %x %x
 " printf
 
+: strcpy
+  " strcpy called
+"
+  rval ! drop drop rval @
+;
+
 var msg1
 
 ( globals for otccelf )
@@ -149,7 +155,18 @@ l" int if else while break return for define main " tokens !
   msg1 @ puts
   init_c
   init_globals
-  ALLOC_SIZE @ 1 calloc
+  ALLOC_SIZE @ 1 calloc sym_stk !
+  tokens @ sym_stk @ strcpy dstk !
 ;
 
 tcc_main
+
+sym_stk @ l"
+sym_stk 0x%x
+" printf
+
+tokens @ puts
+
+dstk @ l"
+dstk 0x%x
+" printf
