@@ -107,10 +107,13 @@ l" printf" 0 dlsym printf_sym !
 100 200 300 l" test printf %x %x %x
 " printf
 
+var strcpy_sym
+l" strcpy" 0 dlsym strcpy_sym !
+
 : strcpy
   " strcpy called
 "
-  0 ( FIXME dummy)
+  strcpy_sym @ generic_call
   rval ! drop drop rval @
 ;
 
@@ -167,6 +170,7 @@ sym_stk 0x%x
 " printf
 
 tokens @ puts
+sym_stk @ puts
 
 dstk @ l"
 dstk 0x%x
