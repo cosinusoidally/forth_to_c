@@ -41,8 +41,6 @@ var str_buf
 var l_offset
 var l_len
 
-var l_count
-
 var out-str
 var char
 
@@ -64,6 +62,7 @@ var char
   if
    drop
    l_len @ 1 + 1 calloc out-str !
+   0 str_buf @ l_len @ + wi8
    exit
   then
   str_buf @ l_len @ + wi8
@@ -75,10 +74,18 @@ var char
 : l" key drop 0 l_len ! loop-l-wrap  0 l_offset ! copy-str ;
 
 var str1
+var str2
+var str3
 
 l" This is a test" str1 !
+l" shorter" str2 !
+l" short" str3 !
 l_len @
 . . .
 str_buf @ puts
 
 str1 @ puts
+str2 @ puts
+str3 @ puts
+
+str_buf @ puts
