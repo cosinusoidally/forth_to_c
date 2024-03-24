@@ -110,6 +110,15 @@ l" printf" 0 dlsym printf_sym !
 var msg1
 
 ( globals for otccelf )
+var dstk
+var ALLOC_SIZE
+var TOK_STR_SIZE
+var glo
+var data
+var ind
+var prog
+var vars
+var sym_stk
 
 l" otccelf start" msg1 !
 
@@ -121,6 +130,7 @@ l" otccelf start" msg1 !
 : init_globals
   " init_globals called
 "
+  99999 ALLOC_SIZE !
 ;
 
 var in_file
@@ -133,6 +143,7 @@ l" artifacts/ex1.exe" out_file !
   msg1 @ puts
   init_c
   init_globals
+  ALLOC_SIZE @ 1 calloc
 ;
 
 tcc_main

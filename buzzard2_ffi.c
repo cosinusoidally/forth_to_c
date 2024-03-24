@@ -144,7 +144,7 @@ r(word_addr)
             a6=peeks(-5);
             a7=peeks(-6);
             if(fn == 1) {
-              /* printf("calling calloc %d %d calloced: ", a1, a2); */
+              printf("calling calloc %d %d calloced: ", a1, a2);
               rval = calloc(a1, a2);
               printf("%d\n",rval);
               top_of_stack =  rval;
